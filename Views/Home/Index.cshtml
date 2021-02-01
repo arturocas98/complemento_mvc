@@ -1,0 +1,86 @@
+﻿@{
+    ViewBag.Title = "Home Page";
+}
+
+<div class="container-fluid" style="position: relative; z-index:1;margin-top:1%">
+    <form id="form1" runat="server">
+        <div class="row" style="margin-top:1%;">
+            <div class="col-md-12">
+                <div class="" style="margin-bottom:1%;">
+                    <div class="bodyLogin">
+                        <div class="containerLogin" id="cont">
+                            <div class="row"    id="center">
+                                <div class="col-md-6 mx-auto " style="margin-left:200px;" >
+                                    <div class="col" id="divBodyLogin">
+                                        <div style="text-align: center;">
+                                            <img alt="" style="width:50%" src="~/Content/Banco_Del_P_Logo.png" />
+
+                                        </div>
+                                        <br />
+                                        <div style="text-align: center;color:white">
+                                            <asp:label id="Msg" runat="server"></asp:label>
+
+                                        </div>
+
+
+                                        <div style="padding-left: 38px;">
+                                            <div id="divForm" class="row">
+
+                                                <div class="col-sm-6 form-group" style="margin-left:70px;" >
+                                                    <img alt="" src="~/Content/Usuario_Icon.jpeg" class="cust" />
+                                                    <input type="text" placeholder="Usuario" runat="server" name="txtUsuario" id="idUsuarioLogin" class="txtLogin" />
+
+                                                </div>
+                                               
+
+                                            </div>
+
+                                            <div class="row">
+                                                <div class="col-sm-6 form-group " style="margin-left:70px;" >
+                                                    <img alt="" src="~/Content/Contraseña_Icon.jpeg" class="cust" />
+                                                    <input type="password" placeholder="Contraseña" runat="server" name="txtPassword" id="idPasswordLogin" class="txtLogin" />
+
+                                                </div>
+                                            </div>
+
+
+                                        </div>
+                                        <br />
+                                        <div style="padding: 0px 20px;">
+                                            <div id="divForm1" class="row">
+                                                <div class="col-sm-12">
+                                                    <Button class="btnIniciarSesion" runat="server" ID="btnlogin"  OnClick="btnLogin" > INICIAR SESIÓN</Button>
+
+                                                </div>
+
+                                                @*<div style="text-align: initial; color: black">
+                                                    <asp:Label ID="lbToken" Text="Token:" runat="server"></asp:Label>
+
+                                                </div>
+                                                <div style="text-align: initial; color: black">
+                                                    <asp:Label ID="Numtoken" Visible="true" runat="server"></asp:Label>
+
+                                                </div>
+                                                <br />
+                                                <div>
+                                                    <asp:Label id="label1" runat="server"></asp:Label>
+                                                </div>
+                                                <div>
+                                                    <asp:Label id="label2" runat="server"></asp:Label>
+                                                </div>*@
+                                            </div>
+                                        </div>
+
+
+
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

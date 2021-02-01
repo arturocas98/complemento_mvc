@@ -1,0 +1,61 @@
+﻿body {
+    padding-top: 50px;
+    padding-bottom: 20px;
+}
+
+/* Set padding to keep content from hitting the edges */
+.body-content {
+    padding-left: 15px;
+    padding-right: 15px;
+}
+
+/* Override the default bootstrap behavior where horizontal description lists 
+   will truncate terms that are too long to fit in the left column 
+*/
+.dl-horizontal dt {
+    white-space: normal;
+}
+
+/* Set width on the form input elements since they're 100% wide by default */
+input,
+select,
+textarea {
+    max-width: 280px;
+}
+
+.bodyLogin {
+    background: transparent url("fondo-de-onda-azul-gris-con-circulo.png") 0% 0% no-repeat padding-box;
+    padding: 40px 0px;
+    background-size: 100%;
+    background-position-y: center;
+}
+
+#divBodyLogin {
+    opacity: 1;
+}
+
+.containerLogin {
+    max-width: 80%;
+    margin: 0px auto;
+}
+
+#idUsuarioLogin, #idPasswordLogin {
+    outline: none;
+}
+
+.btnIniciarSesion {
+    top: 980px;
+    left: 623px;
+    width: 100%;
+    height: 48px;
+    background: #005EBC 0% 0% no-repeat padding-box;
+    border-radius: 7px;
+    opacity: 1;
+    text-align: center;
+    font: Bold 15px/22px;
+    letter-spacing: 0px;
+    color: #FFFFFF;
+    border: none;
+    outline: none;
+}
+
