@@ -1,9 +1,11 @@
-﻿@{
+﻿
+
+@{
     ViewBag.Title = "Home Page";
 }
 
 <div class="container-fluid" style="position: relative; z-index:1;margin-top:1%">
-    <form id="form1" runat="server">
+    <form id="form1" method="post">
         <div class="row" style="margin-top:1%;">
             <div class="col-md-12">
                 <div class="" style="margin-bottom:1%;">
@@ -50,7 +52,11 @@
                                             <div id="divForm1" class="row">
                                                 <div class="col-sm-12">
                                                     <Button class="btnIniciarSesion" runat="server" ID="btnlogin"  OnClick="btnLogin" > INICIAR SESIÓN</Button>
+                                                       
+                                                </div>
 
+                                                <div style="text-align: initial; color: black" >
+                                                    <p>Token:@ViewBag.acces_token</p>
                                                 </div>
 
                                                 @*<div style="text-align: initial; color: black">
@@ -60,14 +66,14 @@
                                                 <div style="text-align: initial; color: black">
                                                     <asp:Label ID="Numtoken" Visible="true" runat="server"></asp:Label>
 
-                                                </div>
+                                                </div>*@
                                                 <br />
                                                 <div>
-                                                    <asp:Label id="label1" runat="server"></asp:Label>
+                                                    <label  asp-for="label1"  ></label>
                                                 </div>
                                                 <div>
-                                                    <asp:Label id="label2" runat="server"></asp:Label>
-                                                </div>*@
+                                                    <label id="label2" ></label>
+                                                </div>
                                             </div>
                                         </div>
 

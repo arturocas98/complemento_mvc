@@ -1,4 +1,5 @@
 ﻿using complemento_mvc.Models;
+using Microsoft.SharePoint.Client;
 using RestSharp;
 using RestSharp.Serialization.Json;
 using System;
@@ -11,37 +12,66 @@ namespace complemento_mvc.Controllers
 {
     public class HomeController : Controller
     {
-        public DatosMarcaciones ObtenerTokenUser()
-        {
-            DatosMarcaciones Consulta = null;
-            DatosMarcaciones lista = new DatosMarcaciones();
-            try
-            {
-                var client = new RestClient("https://172.30.254.58:8443/auth/oauth/v2/token?client_id=94688657-6044-48d9-9732-2e672793f157&client_secret=99e39d6d-cdfe-492e-9456-cec6ef26ac04&grant_type=client_credentials");
-                client.Timeout = -1;
-                var request = new RestRequest(Method.POST);
-                request.AddHeader("Content-Type", "application/x-www-form-urlencoded");
-                System.Net.ServicePointManager.ServerCertificateValidationCallback = delegate { return true; };
-                IRestResponse response = client.Execute(request);
-                JsonDeserializer Deserial = new JsonDeserializer();
-                Consulta = Deserial.Deserialize<DatosMarcaciones>(response);
-                lista.Access_token = Consulta.Access_token;
-            }
-
-            catch (Exception ex)
-            {
-                Console.WriteLine($"Error newRegistraUser {ex.InnerException.InnerException.Message}");
-            }
-            return lista;
-        }
+        private DatosMarcaciones datosMarcaciones = new DatosMarcaciones();
+        [HttpGet]
 
         public ActionResult Index()
         {
-            var obtenerToken = this.ObtenerTokenUser();
+            //.createList();
+            return View();
+        }
+        [HttpPost]
+        public ActionResult Index(string cliente_id, string client_secret,string label1, string label2)
+        {
+            var resultado = datosMarcaciones.obtenerToken(cliente_id, client_secret);
+            ViewBag.acces_token = resultado.Access_token;
+
+            OfficeDevPnP.Core.AuthenticationManager authenticationManager = new OfficeDevPnP.Core.AuthenticationManager();
+            ClientContext clientContext = authenticationManager.GetWebLoginClientContext("https://pacificobp.sharepoint.com/sites/Css_Intranetbp", null);
+            List<string> listasDelSitio = new List<string>();
+
+            clientContext.Load(clientContext.Web.Lists,
+            lists => lists.Include(list => list.Title,
+                                   list => list.Id));
+
+
+            clientContext.ExecuteQuery();
+
+
+            foreach (List list in clientContext.Web.Lists)
+            {
+
+                if (list.Title == "CSLComplementoToken")
+                {
+
+                    listasDelSitio.Add(list.Title);
+                    break;
+                }
+
+
+            }
+
+            if (listasDelSitio.Count > 0)
+            {
+                datosMarcaciones.ActualizarListaGenericaSharePoint(clientContext, resultado.Access_token);
+
+            }
+            else
+            {
+
+                datosMarcaciones.CrearListaGenericaSharePoint(clientContext);
+                datosMarcaciones.ActualizarListaGenericaSharePoint(clientContext, resultado.Access_token);
+            }
+            //string siteUrl = "https://pacificobp.sharepoint.com/sites/Css_Intranetbp";
+
+            //ClientContext clientContext = new ClientContext(siteUrl);
+            datosMarcaciones.ActualizarListaGenericaSharePoint(clientContext, resultado.Access_token);
             return View();
         }
 
+        
 
+        
        
 
         public ActionResult About()
